@@ -1,0 +1,22 @@
+name: Refresh Interaction Limit
+
+on:
+  schedule:
+    - cron: '0 */20 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  refresh-interaction-limit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: set_interaction_limits
+        with:
+          route: PUT /repos/{owner}/{repo}/interaction-limits
+          owner: dandykong
+          repo: indefinite-interaction-limit
+          body: ${{ "limit":"existing_users","expiry":"one_day" }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
