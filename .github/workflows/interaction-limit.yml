@@ -19,7 +19,6 @@ jobs:
           app-id: 1021100
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      
       - name: Refresh indefinite-interaction-limit
         uses: octokit/request-action@v2.x
         id: set_interaction_limits
