@@ -24,13 +24,8 @@ jobs:
         uses: octokit/request-action@v2.x
         id: set_interaction_limits
         with:
-          route: PUT /repos/{owner}/{repo}/interaction-limits
-          owner: dandykong
-          repo: indefinite-interaction-limit
-          body: |
-            {
-              "limit": "existing_users",
-              "expiry": "six_months"
-            }
+          route: PUT /repos/dandykong/indefinite-interaction-limit/interaction-limits
+          limit: existing_users
+          expiry: six_months
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
