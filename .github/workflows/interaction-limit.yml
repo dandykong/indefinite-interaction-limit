@@ -23,4 +23,4 @@ jobs:
               "expiry": "one_day"
             }
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
