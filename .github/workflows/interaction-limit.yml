@@ -1,8 +1,11 @@
-name: Refresh Interaction Limit
+name: Refresh Interaction Limits
+
+env:
+  APP_ID: 1021100
 
 on:
   schedule:
-    - cron: '0 */20 * * *'
+    - cron: '0 0 * */3 *'
 
   workflow_dispatch:
 
@@ -11,7 +14,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: octokit/request-action@v2.x
+
+      - name: Generate app token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      
+      - name: Refresh indefinite-interaction-limit
+        uses: octokit/request-action@v2.x
         id: set_interaction_limits
         with:
           route: PUT /repos/{owner}/{repo}/interaction-limits
@@ -20,7 +33,7 @@ jobs:
           body: |
             {
               "limit": "existing_users",
-              "expiry": "one_day"
+              "expiry": "six_months"
             }
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
