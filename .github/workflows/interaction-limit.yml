@@ -17,6 +17,10 @@ jobs:
           route: PUT /repos/{owner}/{repo}/interaction-limits
           owner: dandykong
           repo: indefinite-interaction-limit
-          body: ${{ "limit":"existing_users","expiry":"one_day" }}
+          body: |
+            {
+              "limit": "existing_users",
+              "expiry": "one_day"
+            }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
