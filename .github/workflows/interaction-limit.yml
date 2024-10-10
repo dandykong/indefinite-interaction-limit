@@ -1,8 +1,5 @@
 name: Refresh Interaction Limits
 
-env:
-  APP_ID: 1021100
-
 on:
   schedule:
     - cron: '0 0 * */3 *'
@@ -19,7 +16,7 @@ jobs:
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ vars.APP_ID }}
+          app-id: 1021100
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       
